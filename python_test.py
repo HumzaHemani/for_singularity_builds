@@ -1,3 +1,3 @@
 #!/usr/bin/env python3
 
-print("your test worked!!!!!!!!!!!!!")
+print("if you're reading this then the file was succesfully downloaded from github.")
