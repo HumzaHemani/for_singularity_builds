@@ -1,12 +1,12 @@
 #!/bin/bash
 # NEEDED MODULES:
- module load parallel
- module load bamtools
- module load samtools
- module load bowtie
- module load GATK/4.1.3.0
- module load bwa
- module load trimgalore
+# module load parallel
+# module load bamtools
+# module load samtools
+# module load bowtie
+# module load GATK/4.1.3.0
+# module load bwa
+# module load trimgalore
 
 # PARSING PARAMETERS
 # sample NUMBER:
