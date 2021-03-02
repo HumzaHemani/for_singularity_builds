@@ -2,10 +2,10 @@
 
 # LOAD MODULES:
 
-module load parallel
-module load bamtools
-module load samtools
-module load GATK/4.1.3.0
+#module load parallel
+#module load bamtools
+#module load samtools
+#module load GATK/4.1.3.0
 
 # sample NUMBER:
 # TAG LIST NUMBER:
@@ -16,8 +16,8 @@ barcode_list=${barcode_list:default_barcode_list}
 # INITIALIZE VARIABLES/DIRECTORY PATHS:
 
 tname=CB
-BIGBAM=${BIGBAM:default_bam_path}
-#BIGBAM_LOCAL=/lscratch/${SLURM_JOB_ID}/possorted_genome_bam.bam
+bigbam=${bigbam:default_bam_path}
+#bigbam_LOCAL=/lscratch/${SLURM_JOB_ID}/possorted_genome_bam.bam
 #ref=${ref:default_ref_path}
 #ref_LOCAL=/lscratch/${SLURM_JOB_ID}/genome.fa
 out=${out:default_out_dir}
@@ -38,7 +38,7 @@ mkdir -p ${out}/${sample}
 # READ IN TAGS - PIPE INTO GNU PARALLEL :
 #                       SPLIT BAM INTO SINGLE CELLS BAM Files
 echo precat
-cat ${barcode_list} | parallel --jobs $num_cores bamtools filter -in ${BIGBAM} -out ${out}/${sample}/${sample}_{}.bam -tag ${tname}:{}
+cat ${barcode_list} | parallel --jobs $num_cores bamtools filter -in ${bigbam} -out ${out}/${sample}/${sample}_{}.bam -tag ${tname}:{}
 echo cat1 done
 cat ${barcode_list} | parallel --jobs $num_cores samtools sort ${out}/${sample}/${sample}_{}.bam
 echo cat2 done
