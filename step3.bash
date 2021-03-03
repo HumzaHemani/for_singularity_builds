@@ -28,5 +28,5 @@ mkdir -p ${out}/${sample}
 
 gatk --java-options "-Xmx1G" HaplotypeCaller -R ${ref_dir}/genome.fa -I ${data}/${sample}_SM_bwa.bam -O ${out}/${sample}_SM_bwa_RawSNPs.vcf
 
-/bin/convert2bed -i vcf < ${out}/${sample}_SM_bwa_RawSNPs.vcf > ${out}/${sample}_SM_bwa_RawSNPs.bed
+/usr/bin/convert2bed -i vcf < ${out}/${sample}_SM_bwa_RawSNPs.vcf > ${out}/${sample}_SM_bwa_RawSNPs.bed
 
