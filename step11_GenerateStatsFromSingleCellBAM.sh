@@ -5,6 +5,17 @@ Sample=${Sample:default_sample_num}
 DataDirectory=${DataDirectory:default_data_dir}
 Targets=${Targets:default_targets}
 
+while [ $# -gt 0 ]; do            
+    if [[ $1 == *"--"* ]]; then
+      param="${1/--/}"
+      declare $param="$2"
+      #echo $1 $2 // Optional to see the parameter:value result
+    fi       
+  shift
+done
+
+#set -o xtrace
+
 echo arguments read in
 READ_EXOME=$(samtools view -c -F 4 -L ${Targets} ${DataDirectory}/${Sample})
 echo read_exome done
