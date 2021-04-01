@@ -1,12 +1,12 @@
 #!/bin/bash
 # NEEDED MODULES:
- #module load parallel
- #module load bamtools
- #module load samtools
- #module load bowtie
- #module load GATK/4.1.3.0
- #module load bwa
- #module load trimgalore
+ module load parallel
+ module load bamtools
+ module load samtools
+ module load bowtie
+ module load GATK/4.1.3.0
+ module load bwa
+ module load trimgalore
 
 # PARSING PARAMETERS
 # sample NUMBER:
@@ -15,7 +15,7 @@ sample=${sample:default_sample_num}
 exome_dir=${exome_dir:default_exome_dir}
 combined_dir=${combined_dir:default_combined_dir}
 aligned_dir=${aligned_dir:default_aligned_dir}
-ref_dir=${ref_dir:default_ref_dir}
+ref_file=${ref_file:default_ref_file}
 num_cores=${num_cores:default_num_cores}
 r1_filename=${r1_filename:default_r1_filename} # path within exome_dir
 r2_filename=${r2_filename:default_r2_filename} # path within exome_dir
@@ -45,8 +45,8 @@ echo $r1_new_file $r2_new_file
 
 # align to the genome sort and index:
 #set -o xtrace
-bwa index "${ref_dir}genome.fa" 
-bwa mem -M -t ${num_cores} "${ref_dir}genome.fa" "${exome_dir}/${r1_new_file}" "${exome_dir}/${r2_new_file}" > "${aligned_dir}${sample}_bwa.sam"
+bwa index "${ref_file}" 
+bwa mem -M -t ${num_cores} "${ref_file}" "${exome_dir}/${r1_new_file}" "${exome_dir}/${r2_new_file}" > "${aligned_dir}${sample}_bwa.sam"
 #set +o xtrace
 echo finished bwa
 
