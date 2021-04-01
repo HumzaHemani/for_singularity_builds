@@ -13,7 +13,6 @@
 sample=${sample:default_sample_num}
 # VARIABLES/ DIRECTORY PATHS:
 exome_dir=${exome_dir:default_exome_dir}
-combined_dir=${combined_dir:default_combined_dir}
 aligned_dir=${aligned_dir:default_aligned_dir}
 ref_file=${ref_file:default_ref_file}
 num_cores=${num_cores:default_num_cores}
