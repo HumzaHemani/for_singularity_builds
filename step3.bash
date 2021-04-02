@@ -13,7 +13,7 @@ sample=${sample:default_sample_num}
 
 out=${out:default_out}
 data=${data:default_data}
-ref_dir=${ref_dir:default_ref}
+ref_file=${ref_file:default_ref}
 
 while [ $# -gt 0 ]; do            
     if [[ $1 == *"--"* ]]; then
@@ -26,7 +26,7 @@ done
 
 mkdir -p ${out}/${sample}
 
-gatk --java-options "-Xmx1G" HaplotypeCaller -R ${ref_dir}/genome.fa -I ${data}/${sample}_SM_bwa.bam -O ${out}/${sample}_SM_bwa_RawSNPs.vcf
+gatk --java-options "-Xmx1G" HaplotypeCaller -R ${ref_file} -I ${data}/${sample}_SM_bwa.bam -O ${out}/${sample}_SM_bwa_RawSNPs.vcf
 
 convert2bed -i vcf < ${out}/${sample}_SM_bwa_RawSNPs.vcf > ${out}/${sample}_SM_bwa_RawSNPs.bed
 
