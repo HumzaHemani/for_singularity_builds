@@ -30,6 +30,7 @@ mkdir -p ${out}/${sample}
 samtools faidx ${ref_file} -o ${ref_file}.fai
 
 dictonary_path=$(echo "${ref_file}" | cut -f 1 -d '.').dict
+echo "dictionary going to ${dictionary_path}"
 gatk --java-options "-Xmx1G" CreateSequenceDictionary -R ${ref_file} -O ${dictonary_path}
 
 gatk --java-options "-Xmx1G" HaplotypeCaller -R ${ref_file} -I ${data}/${sample}_SM_bwa.bam -O ${out}/${sample}_SM_bwa_RawSNPs.vcf
