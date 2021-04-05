@@ -13,7 +13,7 @@ sample=${sample:default_sample_num}
 # INITIALIZE VARIABLES/ DIRECTORY PATHS:
 snp_dir=${snp_dir:default_snp_dir}
 # DATA=${DATA:default_data} doesn't seem to get used.
-ref_dir=${ref_dir:default_ref_dir}
+ref_file=${ref_file:default_ref}
 
 while [ $# -gt 0 ]; do            
     if [[ $1 == *"--"* ]]; then
@@ -24,10 +24,10 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-filter_snp_script=/filter_SNPS.R
+filter_snp_script=./tools/filter_SNPS.R
 
 gatk --java-options "-Xmx1G" VariantFiltration \
-    -R ${ref_dir}/genome.fa \
+    -R ${ref_file}  \
     -V ${snp_dir}/${sample}_SM_bwa_RawSNPs.vcf \
     --filter-expression "QD < 2.0 || FS > 60.0 || MQ < 40.0" \
     --filter-name "my_snp_filter" \
@@ -43,7 +43,7 @@ gatk --java-options "-Xmx1G" SelectVariants \
   -O ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP.vcf.gz \
   -select-type SNP
 
-cat ${ref_dir}/genome.fa | bcftools consensus ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP.vcf.gz > ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP_consensus.fa
+cat ${ref_file} | bcftools consensus ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP.vcf.gz > ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP_consensus.fa
 samtools faidx ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP_consensus.fa
 gatk CreateSequenceDictionary -R ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP_consensus.fa -O ${snp_dir}/${sample}_SM_bwa_RawSNPs_FLTR_SNP_consensus.dict
 
